@@ -1310,6 +1310,28 @@ function showClientSlide(index) { if (!clientBgSlides.length) return; clientBgSl
 function nextClientSlide() { if (clientBgSlides.length) showClientSlide((clientBgIdx + 1) % clientBgSlides.length); }
 if (clientBgSlides.length) clientBgTimer = setInterval(nextClientSlide, 5500);
 
+   /* Bug lifecycle step interactivity */
+const stepData = [
+    { title: 'Test Plan Design', text: 'Designed manual test plans covering CRM content, chatbot scripts, and documentation. Defined test scope, entry/exit criteria, test cases by severity, and assigned coverage to 15+ team members.' },
+    { title: 'Test Execution', text: 'Executed test cases systematically across CRM modules and chatbot interfaces, verifying functional behaviour, linguistic accuracy, and cultural appropriateness.' },
+    { title: 'Bug Filing in Jira', text: 'Every defect filed with: exact steps to reproduce (numbered), environment details, annotated screenshot or screen recording, severity classification, and suggested fix.' },
+    { title: 'Engineering Handoff', text: 'Worked directly with engineering teams to triage issues, clarify reproduction steps, and prioritise fixes. Fix-rate improved by 65%.' },
+    { title: 'Regression Testing', text: 'After each engineering fix cycle, re-tested all resolved issues and ran full regression passes on affected modules.' },
+    { title: 'QA Dashboard Reporting', text: 'Implemented QA dashboards tracking open/closed issues, error frequency trends, and quality metrics — reducing rework cycles by 30%.' }
+];
+
+const bugSteps = document.querySelectorAll('.bug-step');
+const bugDetail = document.getElementById('bugDetail');
+if (bugSteps.length && bugDetail) {
+    bugSteps.forEach((step, idx) => {
+        step.addEventListener('click', () => {
+            bugSteps.forEach(s => s.classList.remove('active'));
+            step.classList.add('active');
+            bugDetail.innerHTML = `<h5>${stepData[idx].title}</h5><p>${stepData[idx].text}</p>`;
+        });
+    });
+}
+   
 // Relocation banner
 setTimeout(() => { const reloBar = document.getElementById('reloBar'); if (reloBar) reloBar.classList.add('show'); }, 2000);
 </script>
